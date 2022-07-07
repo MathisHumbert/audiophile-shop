@@ -1,18 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Earphones from './pages/Earphones';
 import Headphones from './pages/Headphones';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Speakers from './pages/Speakers';
 
+import MenuAside from './components/layout/MenuAside';
+import Navbar from './components/layout/Navbar';
+
 export default function App() {
   return (
     <Router>
-      {/* <ScrollToTop />
-      <Navbar />
-      <CartAside />
+      {/* <CartAside /> */}
+      {/* <CheckoutAside /> */}
       <MenuAside />
-      <CheckoutAside /> */}
+      <Navbar />
+      {/* <ScrollToTop /> */}
 
       <Routes>
         <Route path='/' element={<Home />} />
