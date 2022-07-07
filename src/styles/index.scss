@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --light-black-color: #101010;
+  --grey-color: #f1f1f1;
+  --light-grey-color: #fafafa;
+  --orange-color: #d87d4a;
+  --light-orange-color: #fbaf85;
+}
+
+#root {
+  overflow-x: hidden;
+
+  &.prevent-scroll {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: #fafafa;
+}
+
+.main-center {
+  padding: 0 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+aside {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.4);
+  overflow-y: scroll;
+  cursor: pointer;
+
+  &.open {
+    z-index: 5;
+    opacity: 1;
+  }
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 1.29px;
+  text-transform: uppercase;
+}
+
+h2,
+h4 {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 38px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.88px;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+h6 {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.body {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.subtitle {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.overline {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+
+.btn {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 160px;
+  height: 48px;
+  background: var(--orange-color);
+  color: var(--white-color);
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &.transparent {
+    background: 0;
+    border: 1px solid var(--black-color);
+    color: var(--black-color);
+
+    &:hover {
+      background: var(--black-color);
+      color: var(--white-color);
+    }
+  }
+
+  &:hover {
+    background: var(--light-orange-color);
+  }
+}
+
+.go-back {
+  display: block;
+  width: fit-content;
+  text-decoration: none;
+  color: var(--black-color);
+  opacity: 0.5;
+  margin: 16px 0 24px;
+  transition: color 0.3s ease, opacity 0.3 ease;
+
+  &:hover {
+    color: var(--orange-color);
+    opacity: 1;
+  }
+}
+
+li a {
+  color: var(--white-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--orange-color);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-center {
+    padding: 0 40px;
+  }
+
+  h1 {
+    font-size: 56px;
+    line-height: 58px;
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1.43px;
+  }
+
+  h3 {
+    font-size: 32px;
+    letter-spacing: 1.14px;
+  }
+
+  .go-back {
+    margin: 32px 0 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .go-back {
+    margin: 79px 0 56px;
+  }
+
+  .features-box {
+    padding-top: 160px;
+    display: flex;
+    gap: 125px;
+  }
+}
+
+.bar-container {
+  position: relative;
+  width: 16px;
+  height: 14px;
+  transition: all 0.4s ease;
+  border: 0;
+  background: 0;
+
+  &:hover {
+    .bar2 {
+      width: 16px;
+    }
+  }
+}
+
+.bar {
+  position: absolute;
+}
+
+.bar1 {
+  top: 0;
+}
+
+.bar2 {
+  top: 6px;
+}
+
+.bar3 {
+  top: 12px;
+}
+
+.bar-close {
+  .bar1 {
+    animation: bar1-close 0.2s linear;
+    transform: skewY(40deg);
+    top: 6px;
+  }
+
+  .bar2 {
+    animation: bar2-close 0.2s linear;
+    opacity: 0;
+  }
+
+  .bar3 {
+    animation: bar3-close 0.2s linear;
+    transform: skewY(-40deg);
+    top: 6px;
+  }
+}
+
+.bar-line {
+  .bar1 {
+    animation: bar1-line 0.2s linear;
+    transform: skewY(0deg);
+    top: 0;
+  }
+
+  .bar2 {
+    animation: bar2-line 0.2s linear;
+    opacity: 1;
+  }
+
+  .bar3 {
+    animation: bar3-line 0.2s linear;
+    transform: skewY(0deg);
+    top: 12px;
+  }
+}
+
+.bar {
+  width: 16px;
+  height: 1px;
+  background: rgb(255, 255, 255);
+}
+
+.bar2 {
+  width: 12px;
+  transition: width 0.2s linear;
+}
+
+@keyframes bar1-close {
+  0% {
+    top: 0px;
+    transform: skewY(0);
+  }
+  100% {
+    top: 6px;
+    transform: skewY(40deg);
+  }
+}
+
+@keyframes bar2-close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bar3-close {
+  0% {
+    top: 12px;
+    transform: skewY(0);
+  }
+  100% {
+    top: 6px;
+    transform: skewY(-40deg);
+  }
+}
+
+@keyframes bar1-line {
+  0% {
+    top: 6px;
+    transform: skewY(40deg);
+  }
+  100% {
+    top: 0px;
+    transform: skewY(0);
+  }
+}
+
+@keyframes bar2-line {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes bar3-line {
+  0% {
+    top: 6px;
+    transform: skewY(-40deg);
+  }
+  100% {
+    top: 12px;
+    transform: skewY(0);
+  }
+}
+
+.loading-container,
+.error-container {
+  width: 100%;
+  height: calc(100vh - 126px);
+  margin-top: 40px;
+}
+
+.loading {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #dbd8d6;
+  border-radius: 50%;
+  border-top-color: var(--orange-color);
+  animation: spinner 1s linear infinite;
+  margin: 0 auto;
+}
+
+.error {
+  text-align: center;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
