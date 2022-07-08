@@ -8,15 +8,15 @@ import About from '../components/shared/About';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Hero />
       <MainCenter>
         <>
-          <Categories onClick={() => {}} />
+          <Categories />
           <ProductsInfoContainer />
           <About />
         </>
       </MainCenter>
-    </div>
+    </>
   );
 }

@@ -12,7 +12,7 @@ import { footerLinksData } from '../../utils/data';
 export default function Navbar() {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state: RootState) => state.aside);
-  // const { amount } = useSelector((state) => state.cart);
+  const { amount } = useSelector((state: RootState) => state.cart);
 
   return (
     <Wrapper>
@@ -48,8 +48,7 @@ export default function Navbar() {
             src='/assets//shared/desktop/icon-cart.svg'
             alt='checkout-logo'
           />
-          {/* <div className='cart-amount'>{amount}</div> */}
-          <div className='cart-amount'>0</div>
+          <div className='cart-amount'>{amount}</div>
         </button>
       </div>
     </Wrapper>

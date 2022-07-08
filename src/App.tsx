@@ -6,13 +6,14 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Speakers from './pages/Speakers';
 
+import CartAside from './components/layout/CartAside';
 import MenuAside from './components/layout/MenuAside';
 import Navbar from './components/layout/Navbar';
 
 export default function App() {
   return (
     <Router>
-      {/* <CartAside /> */}
+      <CartAside />
       {/* <CheckoutAside /> */}
       <MenuAside />
       <Navbar />

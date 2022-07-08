@@ -37,3 +37,16 @@ export interface ProductOthers {
   name: string;
   image: ProductImage;
 }
+
+export interface ProductCategory {
+  id: number;
+  img: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  };
+  isNew: boolean;
+  title: string;
+  text: string;
+  url: string;
+}

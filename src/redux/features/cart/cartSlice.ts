@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface CartItem {
+export interface CartItem {
   id: string;
   name: string;
   price: number;
@@ -43,26 +43,18 @@ const cartSlice = createSlice({
       state.cart = [];
       localStorage.removeItem('cart');
     },
-    deleteItem: (state, action) => {
+    deleteItem: (state, action: PayloadAction<string>) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
-    incItemAmount: (state, action) => {
-      state.cart.map((item) => {
-        if (item.id === action.payload) {
-          item.amount += 1;
-        }
-        return item;
-      });
+    incItemAmount: (state, action: PayloadAction<string>) => {
+      const cart_item = state.cart.find((item) => action.payload === item.id);
+      cart_item!.amount += 1;
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
-    decItemAmount: (state, action) => {
-      state.cart.map((item) => {
-        if (item.id === action.payload) {
-          item.amount -= 1;
-        }
-        return item;
-      });
+    decItemAmount: (state, action: PayloadAction<string>) => {
+      const cart_item = state.cart.find((item) => action.payload === item.id);
+      cart_item!.amount -= 1;
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     toggleCartInfo: (state) => {

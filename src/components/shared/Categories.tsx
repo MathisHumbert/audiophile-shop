@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaChevronRight } from 'react-icons/fa';
 import { categoriesData } from '../../utils/data';
 
-export default function Categories({ onClick }: { onClick: () => void }) {
+export default function Categories({ onClick }: { onClick?: () => void }) {
   return (
     <Wrapper>
       {categoriesData.map((item) => (

@@ -65,7 +65,7 @@ export default function Product() {
         </div>
         <ProductGallery gallery={product.gallery} />
         <OtherProducts featured={product.others} />
-        <Categories onClick={() => {}} />
+        <Categories />
         <About />
       </>
     </MainCenter>
