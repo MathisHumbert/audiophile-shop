@@ -26,7 +26,7 @@ export default function App() {
         {/* <Route path='/checkout' element={<PrivateRoute />}>
           <Route index element={<Checkout />} />
         </Route> */}
-        <Route path='/products/:productName' element={<Product />} />
+        <Route path='/products/:product_id' element={<Product />} />
       </Routes>
       {/* <Footer /> */}
     </Router>
