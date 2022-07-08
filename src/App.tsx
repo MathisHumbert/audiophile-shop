@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Checkout from './pages/Checkout';
 import Earphones from './pages/Earphones';
 import Headphones from './pages/Headphones';
 import Home from './pages/Home';
@@ -9,6 +10,8 @@ import Speakers from './pages/Speakers';
 import CartAside from './components/layout/CartAside';
 import MenuAside from './components/layout/MenuAside';
 import Navbar from './components/layout/Navbar';
+import PrivateRoute from './components/router/PrivateRoute';
+import ScrollToTop from './components/router/ScrollToTop';
 
 export default function App() {
   return (
@@ -17,16 +20,16 @@ export default function App() {
       {/* <CheckoutAside /> */}
       <MenuAside />
       <Navbar />
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
 
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/headphones' element={<Headphones />} />
         <Route path='/speakers' element={<Speakers />} />
         <Route path='/earphones' element={<Earphones />} />
-        {/* <Route path='/checkout' element={<PrivateRoute />}>
+        <Route path='/checkout' element={<PrivateRoute />}>
           <Route index element={<Checkout />} />
-        </Route> */}
+        </Route>
         <Route path='/products/:product_id' element={<Product />} />
       </Routes>
       {/* <Footer /> */}
