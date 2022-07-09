@@ -1,12 +1,63 @@
-// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-// import FormControl from './FormControl';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+
+import FormControl from './FormControl';
 // import FormControlPayment from './FormControlPayment';
 
+interface FormInput {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  zip: string;
+  city: string;
+  country: string;
+  emoney: string;
+  emoneyNumber: string;
+  emoneyPin: string;
+}
+
 export default function CheckoutForm() {
+  const {
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInput>({
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      zip: '',
+      city: '',
+      country: '',
+      emoney: '',
+      emoneyNumber: '',
+      emoneyPin: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+
   return (
-    <Wrapper onSubmit={(e) => e.preventDefault()}>
+    <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <h3>checkout</h3>
+      <Controller
+        name='name'
+        control={control}
+        render={({ field: { value } }) => (
+          <FormControl
+            setValue={setValue}
+            value={value}
+            errors={errors}
+            // clearErrors={clearErrors}
+            name='name'
+            type='text'
+            title='Name'
+            placeholder='Alexei Ward'
+          />
+        )}
+      />
     </Wrapper>
   );
 }
