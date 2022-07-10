@@ -20,6 +20,7 @@ export default function CheckoutForm() {
   const { control, watch, handleSubmit } = useForm<FormInput>({
     defaultValues: {
       name: '',
+      email: '',
     },
   });
 
@@ -33,6 +34,7 @@ export default function CheckoutForm() {
       <Controller
         control={control}
         name='name'
+        rules={{ required: 'Un téléphone est requis' }}
         render={({
           field: { onChange, onBlur, value, name, ref },
           fieldState: { invalid, isTouched, isDirty, error },
@@ -47,22 +49,35 @@ export default function CheckoutForm() {
             name='name'
             type='text'
             title='Name'
-            placeholder='Name'
+            placeholder='Alexei Ward'
           />
         )}
       />
+      <Controller
+        control={control}
+        name='email'
+        rules={{ required: 'Un email est requis' }}
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid, isTouched, isDirty, error },
+          formState,
+        }) => (
+          <FormControl
+            // onBlur={onBlur} // notify when input is touched
+            onChange={onChange} // send value to hook form
+            value={value}
+            error={error}
+            // inputRef={ref}
+            name='email'
+            type='text'
+            title='Email Address'
+            placeholder='alexei@mail.com'
+          />
+        )}
+      />
+      <button type='submit'>submit</button>
     </Wrapper>
   );
-}
-
-interface Props {
-  onChange: (value: any) => void;
-  value: string;
-  errors: any;
-  name: string;
-  type: string;
-  title: string;
-  placeholder: string;
 }
 
 const Wrapper = styled.form`

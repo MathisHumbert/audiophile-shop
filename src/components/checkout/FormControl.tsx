@@ -24,7 +24,7 @@ export default function FormControl({
     <Wrapper className='control-form'>
       <header>
         <label htmlFor={name}>{title}</label>
-        <p className='small'>Wrong Format</p>
+        {error && <p className='small'>Wrong Format</p>}
       </header>
       <input
         type={type}
