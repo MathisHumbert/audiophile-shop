@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
 import FormControl from './FormControl';
-// import FormControlPayment from './FormControlPayment';
 
-interface FormInput {
+export interface FormInput {
   name: string;
   email: string;
   phone: string;
@@ -18,24 +17,13 @@ interface FormInput {
 }
 
 export default function CheckoutForm() {
-  const {
-    control,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInput>({
+  const { control, watch, handleSubmit } = useForm<FormInput>({
     defaultValues: {
       name: '',
-      email: '',
-      phone: '',
-      zip: '',
-      city: '',
-      country: '',
-      emoney: '',
-      emoneyNumber: '',
-      emoneyPin: '',
     },
   });
+
+  console.log(watch());
 
   const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
 
@@ -43,23 +31,38 @@ export default function CheckoutForm() {
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <h3>checkout</h3>
       <Controller
-        name='name'
         control={control}
-        render={({ field: { value } }) => (
+        name='name'
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid, isTouched, isDirty, error },
+          formState,
+        }) => (
           <FormControl
-            setValue={setValue}
+            // onBlur={onBlur} // notify when input is touched
+            onChange={onChange} // send value to hook form
             value={value}
-            errors={errors}
-            // clearErrors={clearErrors}
+            error={error}
+            // inputRef={ref}
             name='name'
             type='text'
             title='Name'
-            placeholder='Alexei Ward'
+            placeholder='Name'
           />
         )}
       />
     </Wrapper>
   );
+}
+
+interface Props {
+  onChange: (value: any) => void;
+  value: string;
+  errors: any;
+  name: string;
+  type: string;
+  title: string;
+  placeholder: string;
 }
 
 const Wrapper = styled.form`

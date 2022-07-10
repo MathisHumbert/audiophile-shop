@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { FieldError } from 'react-hook-form';
 
 interface Props {
-  setValue: (name: string, value: unknown) => void;
+  onChange: (value: any) => void;
   value: string;
-  errors: any;
+  error: FieldError | undefined;
   name: string;
   type: string;
   title: string;
@@ -11,9 +12,9 @@ interface Props {
 }
 
 export default function FormControl({
-  setValue,
+  onChange,
   value,
-  errors,
+  error,
   name,
   type,
   title,
@@ -29,7 +30,7 @@ export default function FormControl({
         type={type}
         id={name}
         value={value}
-        onChange={() => setValue(name, value)}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className='control-input'
       />

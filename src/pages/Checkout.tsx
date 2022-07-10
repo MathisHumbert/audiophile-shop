@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 import MainCenter from '../components/shared/MainCenter';
 import GoBack from '../components/shared/GoBack';
+import CheckoutForm from '../components/checkout/CheckoutForm';
 
 export default function Checkout() {
   return (
     <MainCenter>
       <>
         <GoBack />
-        <Wrapper></Wrapper>
+        <Wrapper>
+          <CheckoutForm />
+        </Wrapper>
       </>
     </MainCenter>
   );
