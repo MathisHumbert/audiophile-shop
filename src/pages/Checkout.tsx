@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
+import { toggleCheckoutAside } from '../redux/features/aside/asideSlice';
 import MainCenter from '../components/shared/MainCenter';
 import GoBack from '../components/shared/GoBack';
 import FormControl from '../components/checkout/FormControl';
 import FormControlPayment from '../components/checkout/FormControlPayment';
+import Summary from '../components/checkout/Summary';
 
-export interface FormInput {
+interface FormInput {
   name: string;
   email: string;
   phone: string;
@@ -22,6 +25,7 @@ export interface FormInput {
 
 export default function Checkout() {
   const [isEmoney, setIsEmoeny] = useState(true);
+  const dispatch = useDispatch();
 
   const { control, handleSubmit } = useForm<FormInput>({
     defaultValues: {
@@ -38,251 +42,253 @@ export default function Checkout() {
     },
   });
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInput> = (data) => {
+    console.log(data);
+    dispatch(toggleCheckoutAside());
+  };
 
   return (
     <MainCenter>
-      <>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <GoBack />
         <Wrapper>
           <div className='form-wrapper'>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <h3>checkout</h3>
-              {/* BILLING DETAILS */}
-              <div className='form-container'>
-                <div className='form-group'>
-                  <p className='subtitle'>billing details</p>
-                  <div className='inputs-container billing-details'>
-                    {/* NAME */}
-                    <Controller
-                      control={control}
-                      name='name'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='name'
-                          type='text'
-                          title='Name'
-                          placeholder='Alexei Ward'
-                        />
-                      )}
-                    />
-                    {/* EMAIL */}
-                    <Controller
-                      control={control}
-                      name='email'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='email'
-                          type='text'
-                          title='Email Address'
-                          placeholder='alexei@mail.com'
-                        />
-                      )}
-                    />
-                    {/* PHONE */}
-                    <Controller
-                      control={control}
-                      name='phone'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='phone'
-                          type='number'
-                          title='Phone Number'
-                          placeholder='+1 202-555-0136'
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-                {/* SHIPPING INFO */}
-                <div className='form-group'>
-                  <p className='subtitle'>shipping info</p>
-                  <div className='inputs-container shipping-info'>
-                    {/* ADDRESS */}
-                    <Controller
-                      control={control}
-                      name='address'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='address'
-                          type='text'
-                          title='Your Address'
-                          placeholder='1137 Williams Avenue'
-                        />
-                      )}
-                    />
-                    {/* ZIP */}
-                    <Controller
-                      control={control}
-                      name='zip'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='zip'
-                          type='number'
-                          title='ZIP Code'
-                          placeholder='10001'
-                        />
-                      )}
-                    />
-                    {/* CITY */}
-                    <Controller
-                      control={control}
-                      name='city'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='city'
-                          type='text'
-                          title='City'
-                          placeholder='New York'
-                        />
-                      )}
-                    />
-                    {/* COUNTRY */}
-                    <Controller
-                      control={control}
-                      name='country'
-                      rules={{ required: 'This field is required' }}
-                      render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                      }) => (
-                        <FormControl
-                          onChange={onChange}
-                          value={value}
-                          error={error}
-                          name='country'
-                          type='text'
-                          title='Country'
-                          placeholder='United States'
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-                {/* PAYMENT DETAILS */}
-                <div className='form-group'>
-                  <p className='subtitle'>payement details</p>
-                  <div className='inputs-container checkboxes'>
-                    <p className='label'>Payment Method</p>
-                    <FormControlPayment
-                      name='emoney'
-                      value={isEmoney}
-                      onChange={setIsEmoeny}
-                      title='e-Money'
-                    />
-                    <FormControlPayment
-                      name='cash'
-                      value={!isEmoney}
-                      onChange={setIsEmoeny}
-                      title='Cash on Delivery'
-                    />
-                  </div>
-                </div>
-                <div className='form-group'>
-                  {isEmoney ? (
-                    // EMONEY
-                    <div className='inputs-container emoney'>
-                      {/* EMONEY NUMBER */}
-                      <Controller
-                        control={control}
-                        name='emoneyNumber'
-                        rules={{ required: 'This field is required' }}
-                        render={({
-                          field: { onChange, value },
-                          fieldState: { error },
-                        }) => (
-                          <FormControl
-                            onChange={onChange}
-                            value={value}
-                            error={error}
-                            name='emoneyNumber'
-                            type='number'
-                            title='e-Money Number'
-                            placeholder='238521993'
-                          />
-                        )}
+            <h3>checkout</h3>
+            {/* BILLING DETAILS */}
+            <div className='form-container'>
+              <div className='form-group'>
+                <p className='subtitle'>billing details</p>
+                <div className='inputs-container billing-details'>
+                  {/* NAME */}
+                  <Controller
+                    control={control}
+                    name='name'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='name'
+                        type='text'
+                        title='Name'
+                        placeholder='Alexei Ward'
                       />
-                      {/* EMONEY PIN */}
-                      <Controller
-                        control={control}
-                        name='emoneyPin'
-                        rules={{ required: 'This field is required' }}
-                        render={({
-                          field: { onChange, value },
-                          fieldState: { error },
-                        }) => (
-                          <FormControl
-                            onChange={onChange}
-                            value={value}
-                            error={error}
-                            name='emoneyPin'
-                            type='number'
-                            title='e-Money PIN'
-                            placeholder='6891'
-                          />
-                        )}
+                    )}
+                  />
+                  {/* EMAIL */}
+                  <Controller
+                    control={control}
+                    name='email'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='email'
+                        type='text'
+                        title='Email Address'
+                        placeholder='alexei@mail.com'
                       />
-                    </div>
-                  ) : (
-                    // CASH
-                    <div className='cash-container'>
-                      <img src='/assets/cart/cash-icon.svg' alt='cash' />
-                      <p className='body'>
-                        The 'Cash on Delivery' option enables you to pay in cash
-                        when our delivery courier arrives at your residence.
-                        Just make sure your address is correct so that your
-                        order will not be cancelled.
-                      </p>
-                    </div>
-                  )}
+                    )}
+                  />
+                  {/* PHONE */}
+                  <Controller
+                    control={control}
+                    name='phone'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='phone'
+                        type='number'
+                        title='Phone Number'
+                        placeholder='+1 202-555-0136'
+                      />
+                    )}
+                  />
                 </div>
               </div>
-            </form>
+              {/* SHIPPING INFO */}
+              <div className='form-group'>
+                <p className='subtitle'>shipping info</p>
+                <div className='inputs-container shipping-info'>
+                  {/* ADDRESS */}
+                  <Controller
+                    control={control}
+                    name='address'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='address'
+                        type='text'
+                        title='Your Address'
+                        placeholder='1137 Williams Avenue'
+                      />
+                    )}
+                  />
+                  {/* ZIP */}
+                  <Controller
+                    control={control}
+                    name='zip'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='zip'
+                        type='number'
+                        title='ZIP Code'
+                        placeholder='10001'
+                      />
+                    )}
+                  />
+                  {/* CITY */}
+                  <Controller
+                    control={control}
+                    name='city'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='city'
+                        type='text'
+                        title='City'
+                        placeholder='New York'
+                      />
+                    )}
+                  />
+                  {/* COUNTRY */}
+                  <Controller
+                    control={control}
+                    name='country'
+                    rules={{ required: 'This field is required' }}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => (
+                      <FormControl
+                        onChange={onChange}
+                        value={value}
+                        error={error}
+                        name='country'
+                        type='text'
+                        title='Country'
+                        placeholder='United States'
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+              {/* PAYMENT DETAILS */}
+              <div className='form-group'>
+                <p className='subtitle'>payement details</p>
+                <div className='inputs-container checkboxes'>
+                  <p className='label'>Payment Method</p>
+                  <FormControlPayment
+                    name='emoney'
+                    value={isEmoney}
+                    onChange={setIsEmoeny}
+                    title='e-Money'
+                  />
+                  <FormControlPayment
+                    name='cash'
+                    value={!isEmoney}
+                    onChange={setIsEmoeny}
+                    title='Cash on Delivery'
+                  />
+                </div>
+              </div>
+              <div className='form-group'>
+                {isEmoney ? (
+                  // EMONEY
+                  <div className='inputs-container emoney'>
+                    {/* EMONEY NUMBER */}
+                    <Controller
+                      control={control}
+                      name='emoneyNumber'
+                      rules={{ required: 'This field is required' }}
+                      render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                      }) => (
+                        <FormControl
+                          onChange={onChange}
+                          value={value}
+                          error={error}
+                          name='emoneyNumber'
+                          type='number'
+                          title='e-Money Number'
+                          placeholder='238521993'
+                        />
+                      )}
+                    />
+                    {/* EMONEY PIN */}
+                    <Controller
+                      control={control}
+                      name='emoneyPin'
+                      rules={{ required: 'This field is required' }}
+                      render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                      }) => (
+                        <FormControl
+                          onChange={onChange}
+                          value={value}
+                          error={error}
+                          name='emoneyPin'
+                          type='number'
+                          title='e-Money PIN'
+                          placeholder='6891'
+                        />
+                      )}
+                    />
+                  </div>
+                ) : (
+                  // CASH
+                  <div className='cash-container'>
+                    <img src='/assets/cart/cash-icon.svg' alt='cash' />
+                    <p className='body'>
+                      The 'Cash on Delivery' option enables you to pay in cash
+                      when our delivery courier arrives at your residence. Just
+                      make sure your address is correct so that your order will
+                      not be cancelled.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
+          <Summary />
         </Wrapper>
-      </>
+      </form>
     </MainCenter>
   );
 }

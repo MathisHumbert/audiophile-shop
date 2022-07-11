@@ -5,7 +5,7 @@ import SummaryItem from './SummaryItem';
 import { formatPrice } from '../../utils/helpers';
 import { RootState } from '../../redux/app/store';
 
-export default function Summary({ onSubmit }: { onSubmit: () => {} }) {
+export default function Summary() {
   const { cart, total } = useSelector((state: RootState) => state.cart);
 
   return (
@@ -34,7 +34,7 @@ export default function Summary({ onSubmit }: { onSubmit: () => {} }) {
           <h5>{formatPrice(total + 50)}</h5>
         </div>
       </div>
-      <button className='btn' onClick={onSubmit}>
+      <button className='btn' type='submit'>
         continue & pay
       </button>
     </Wrapper>

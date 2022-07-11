@@ -8,6 +8,7 @@ import Product from './pages/Product';
 import Speakers from './pages/Speakers';
 
 import CartAside from './components/layout/CartAside';
+import CheckoutAside from './components/layout/CheckoutAside';
 import MenuAside from './components/layout/MenuAside';
 import Navbar from './components/layout/Navbar';
 import PrivateRoute from './components/router/PrivateRoute';
@@ -17,7 +18,7 @@ export default function App() {
   return (
     <Router>
       <CartAside />
-      {/* <CheckoutAside /> */}
+      <CheckoutAside />
       <MenuAside />
       <Navbar />
       <ScrollToTop />
