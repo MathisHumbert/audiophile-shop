@@ -9,6 +9,7 @@ import Speakers from './pages/Speakers';
 
 import CartAside from './components/layout/CartAside';
 import CheckoutAside from './components/layout/CheckoutAside';
+import Footer from './components/layout/Footer';
 import MenuAside from './components/layout/MenuAside';
 import Navbar from './components/layout/Navbar';
 import PrivateRoute from './components/router/PrivateRoute';
@@ -33,7 +34,7 @@ export default function App() {
         </Route>
         <Route path='/products/:product_id' element={<Product />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

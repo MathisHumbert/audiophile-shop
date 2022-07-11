@@ -20,7 +20,6 @@ export default function FormControl({
   title,
   placeholder,
 }: Props) {
-  console.log(error?.message);
   return (
     <Wrapper className='control-form'>
       <header>

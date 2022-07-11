@@ -4,6 +4,12 @@ import styled from 'styled-components';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
 import { toggleCheckoutAside } from '../redux/features/aside/asideSlice';
+import {
+  general_rules,
+  email_rules,
+  phone_rules,
+  emoney_rules,
+} from '../utils/rules';
 import MainCenter from '../components/shared/MainCenter';
 import GoBack from '../components/shared/GoBack';
 import FormControl from '../components/checkout/FormControl';
@@ -43,7 +49,6 @@ export default function Checkout() {
   });
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    console.log(data);
     dispatch(toggleCheckoutAside());
   };
 
@@ -63,7 +68,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='name'
-                    rules={{ required: 'This field is required' }}
+                    rules={general_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -83,9 +88,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='email'
-                    rules={{
-                      required: 'This field is required',
-                    }}
+                    rules={email_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -105,7 +108,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='phone'
-                    rules={{ required: 'This field is required' }}
+                    rules={phone_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -115,7 +118,7 @@ export default function Checkout() {
                         value={value}
                         error={error}
                         name='phone'
-                        type='number'
+                        type='text'
                         title='Phone Number'
                         placeholder='+1 202-555-0136'
                       />
@@ -131,7 +134,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='address'
-                    rules={{ required: 'This field is required' }}
+                    rules={general_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -151,7 +154,13 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='zip'
-                    rules={{ required: 'This field is required' }}
+                    // rules={{
+                    //   required: 'This field is required',
+                    //   pattern: {
+                    //     value: ph_regex,
+                    //     message: 'Wrong Format',
+                    //   },
+                    // }}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -161,7 +170,7 @@ export default function Checkout() {
                         value={value}
                         error={error}
                         name='zip'
-                        type='number'
+                        type='text'
                         title='ZIP Code'
                         placeholder='10001'
                       />
@@ -171,7 +180,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='city'
-                    rules={{ required: 'This field is required' }}
+                    rules={general_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -191,7 +200,7 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='country'
-                    rules={{ required: 'This field is required' }}
+                    rules={general_rules}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -236,7 +245,7 @@ export default function Checkout() {
                     <Controller
                       control={control}
                       name='emoneyNumber'
-                      rules={{ required: 'This field is required' }}
+                      rules={emoney_rules}
                       render={({
                         field: { onChange, value },
                         fieldState: { error },
@@ -246,7 +255,7 @@ export default function Checkout() {
                           value={value}
                           error={error}
                           name='emoneyNumber'
-                          type='number'
+                          type='text'
                           title='e-Money Number'
                           placeholder='238521993'
                         />
@@ -256,7 +265,7 @@ export default function Checkout() {
                     <Controller
                       control={control}
                       name='emoneyPin'
-                      rules={{ required: 'This field is required' }}
+                      rules={emoney_rules}
                       render={({
                         field: { onChange, value },
                         fieldState: { error },
@@ -266,7 +275,7 @@ export default function Checkout() {
                           value={value}
                           error={error}
                           name='emoneyPin'
-                          type='number'
+                          type='text'
                           title='e-Money PIN'
                           placeholder='6891'
                         />

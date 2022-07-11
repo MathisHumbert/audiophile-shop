@@ -62,12 +62,12 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 768px) {
-    background-image: url('/assets/home/mobile/image-header.jpg');
+    background-image: url('/assets/home/tablet/image-header.jpg');
     margin-bottom: 96px;
   }
 
   @media (min-width: 1440px) {
-    background-image: url('/assets/home/mobile/image-header.jpg');
+    background-image: url('/assets/home/desktop/image-hero.jpg');
     margin-bottom: 120px;
     align-items: center;
     justify-content: initial;
