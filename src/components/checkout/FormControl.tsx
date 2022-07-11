@@ -20,11 +20,14 @@ export default function FormControl({
   title,
   placeholder,
 }: Props) {
+  console.log(error?.message);
   return (
     <Wrapper className='control-form'>
       <header>
-        <label htmlFor={name}>{title}</label>
-        {error && <p className='small'>Wrong Format</p>}
+        <label htmlFor={name} className={error?.message && 'error'}>
+          {title}
+        </label>
+        {error?.message && <p className='small'>{error.message}</p>}
       </header>
       <input
         type={type}
@@ -32,7 +35,7 @@ export default function FormControl({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className='control-input'
+        className={error?.message && 'error'}
       />
     </Wrapper>
   );
@@ -52,16 +55,22 @@ const Wrapper = styled.div`
   label,
   .small {
     font-size: 12px;
-    font-weight: 700;
     letter-spacing: -0.21px;
     line-height: 16px;
     cursor: pointer;
   }
 
+  label {
+    font-weight: 700;
+
+    &.error {
+      color: #cd2c2c;
+    }
+  }
+
   .small {
     font-weight: 500;
     color: #cd2c2c;
-    opacity: 0;
   }
 
   input {
@@ -74,6 +83,7 @@ const Wrapper = styled.div`
     color: var(--black-color);
     transition: 0.3s border ease;
     cursor: pointer;
+    text-align: left;
 
     &::placeholder {
       font-size: 14px;
@@ -89,6 +99,10 @@ const Wrapper = styled.div`
 
     &:hover {
       border: 1px solid var(--orange-color);
+    }
+
+    &.error {
+      border: 1px solid #cd2c2c;
     }
   }
 

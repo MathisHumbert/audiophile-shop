@@ -83,7 +83,9 @@ export default function Checkout() {
                   <Controller
                     control={control}
                     name='email'
-                    rules={{ required: 'This field is required' }}
+                    rules={{
+                      required: 'This field is required',
+                    }}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
