@@ -147,7 +147,7 @@ export const speakersPageData: ProductCategory[] = [
       tablet:
         '/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg',
       desktop:
-        '/assets/product-zx7-speaker/dekstop/image-category-page-preview.jpg',
+        '/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg',
     },
     isNew: false,
     title: 'ZX7 speaker',
